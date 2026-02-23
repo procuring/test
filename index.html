@@ -4,74 +4,92 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PARA - Зоомагазин</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* Общие настройки */
+        /* --- НАСТРОЙКИ --- */
         :root {
-            --primary-blue: #1C5D99; /* Основной синий */
-            --dark-blue: #163b65;   /* Темно-синий для футера и кнопок */
-            --bg-light: #EAF4FC;    /* Светло-голубой фон */
-            --text-color: #333;
+            --primary-blue: #1C5D99;
+            --dark-blue: #1B3A5B;   /* Глубокий синий как в футере */
+            --btn-blue: #204E78;    /* Цвет кнопок */
+            --bg-light: #EAF4FC;    /* Светлый фон секции */
+            --text-main: #333;
             --white: #ffffff;
+            --green: #2ECC71;
         }
 
         body {
             margin: 0;
             padding: 0;
             font-family: 'Montserrat', sans-serif;
-            color: var(--text-color);
-            box-sizing: border-box;
+            color: var(--text-main);
+            overflow-x: hidden;
         }
 
-        a { text-decoration: none; color: inherit; }
+        a { text-decoration: none; color: inherit; transition: 0.3s; }
+        ul { list-style: none; padding: 0; margin: 0; }
 
-        /* Шапка (Header) */
+        /* --- ШАПКА (HEADER) --- */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 20px 50px;
+            padding: 15px 5%;
             background-color: var(--white);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            position: relative;
+            z-index: 10;
         }
 
         .logo {
-            font-size: 24px;
+            font-size: 26px;
             font-weight: 800;
             color: var(--dark-blue);
-            text-transform: uppercase;
             letter-spacing: 1px;
+            text-transform: uppercase;
         }
 
         nav ul {
             display: flex;
-            list-style: none;
-            gap: 30px;
-            padding: 0;
-            margin: 0;
+            gap: 40px;
         }
 
         nav ul li a {
             font-size: 14px;
-            color: #555;
             font-weight: 500;
+            color: #555;
         }
+        nav ul li a:hover { color: var(--primary-blue); }
 
         .btn-consult {
-            background-color: var(--dark-blue);
+            background-color: var(--btn-blue);
             color: var(--white);
-            padding: 10px 25px;
+            padding: 10px 20px 10px 25px;
             border-radius: 50px;
-            font-size: 14px;
+            font-size: 13px;
             border: none;
             cursor: pointer;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: background 0.3s;
+        }
+        .btn-consult:hover { background-color: #163b65; }
+
+        /* Иконка лупы внутри кнопки */
+        .search-icon {
+            width: 14px;
+            height: 14px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 2;
         }
 
-        /* Главный экран (Hero) */
+        /* --- ГЛАВНЫЙ ЭКРАН (HERO) --- */
         .hero {
-            /* Градиент вместо фото. Если есть фото, замени url(...) */
-            background: linear-gradient(135deg, #1e5799 0%, #2989d8 50%, #207cca 100%); 
-            height: 500px;
+            /* Синий градиент, имитирующий фото */
+            background: linear-gradient(135deg, #236caf 0%, #1e5799 50%, #1488cc 100%);
+            height: 550px;
             display: flex;
             flex-direction: column;
             justify-content: center;
@@ -79,57 +97,62 @@
             text-align: center;
             color: var(--white);
             position: relative;
+            overflow: hidden;
         }
 
-        /* Имитация картинки собаки (опционально) */
-        .hero::after {
+        /* Декоративный круг на фоне (для красоты) */
+        .hero::before {
             content: '';
             position: absolute;
-            top: 0; left: 0; right: 0; bottom: 0;
-            background: url('https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80') center/cover;
-            opacity: 0.2; /* Полупрозрачная картинка */
-            z-index: 0;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
-            max-width: 800px;
-            padding: 0 20px;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
         }
 
         .hero h1 {
-            font-size: 42px;
-            margin-bottom: 20px;
+            font-size: 48px;
+            margin: 0 0 20px 0;
             font-weight: 700;
+            line-height: 1.1;
+            z-index: 2;
         }
 
         .hero p {
             font-size: 16px;
-            line-height: 1.5;
-            margin-bottom: 30px;
-            opacity: 0.9;
+            line-height: 1.6;
+            margin-bottom: 35px;
+            max-width: 600px;
+            opacity: 0.95;
+            z-index: 2;
         }
 
         .btn-white {
             background-color: var(--white);
             color: var(--dark-blue);
-            padding: 15px 35px;
+            padding: 16px 40px;
             border-radius: 50px;
             font-weight: 700;
+            font-size: 14px;
             border: none;
             cursor: pointer;
-            transition: 0.3s;
+            transition: transform 0.2s, box-shadow 0.2s;
+            z-index: 2;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
 
         .btn-white:hover {
-            transform: scale(1.05);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
-        /* Секция с карточками */
+        /* --- КАРТОЧКИ --- */
         .cards-section {
             background-color: var(--bg-light);
-            padding: 60px 20px;
+            padding: 80px 20px;
             display: flex;
             justify-content: center;
             gap: 30px;
@@ -139,20 +162,28 @@
         .card {
             background: var(--white);
             border-radius: 20px;
-            padding: 40px 30px;
-            width: 350px;
+            padding: 40px 35px;
+            width: 380px;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            box-shadow: 0 10px 40px rgba(28, 93, 153, 0.08);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            align-items: center;
+            transition: transform 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
         }
 
         .card h3 {
-            color: var(--dark-blue);
-            margin-top: 0;
+            color: var(--btn-blue);
+            margin: 0 0 15px 0;
             text-transform: uppercase;
             font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
         .card p {
@@ -163,119 +194,122 @@
         }
 
         .btn-card {
-            background-color: var(--dark-blue);
+            background-color: var(--btn-blue);
             color: var(--white);
-            padding: 12px 30px;
+            padding: 14px 40px;
             border-radius: 50px;
             border: none;
             cursor: pointer;
             font-weight: 600;
-            width: 100%;
+            font-size: 14px;
+            transition: background 0.3s;
         }
+        .btn-card:hover { background-color: #163b65; }
 
-        /* Плавающая кнопка чата */
+        /* Плавающая кнопка (Чат) */
         .fab {
             position: absolute;
-            right: 50px;
+            right: 40px;
             top: 50%;
             transform: translateY(-50%);
-            width: 60px;
-            height: 60px;
-            background-color: #2ECC71;
+            width: 55px;
+            height: 55px;
+            background-color: var(--green);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
             cursor: pointer;
+            transition: transform 0.3s;
+            z-index: 100;
         }
+        .fab:hover { transform: translateY(-50%) scale(1.1); }
         
-        .fab::after {
-            content: '💬';
-            font-size: 24px;
-            color: white;
+        .chat-icon {
+            width: 24px;
+            height: 24px;
+            fill: white;
         }
 
-        /* Секция преимуществ */
+        /* --- ПРЕИМУЩЕСТВА --- */
         .features {
             background-color: var(--white);
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
         }
 
         .features h2 {
-            font-family: 'Times New Roman', serif; /* Для стиля с засечками как на макете */
-            font-size: 28px;
-            color: #333;
-            margin-bottom: 50px;
+            font-family: 'Times New Roman', serif;
+            font-size: 32px;
+            color: #222;
+            margin-bottom: 60px;
+            font-weight: 600;
         }
 
         .features-grid {
             display: flex;
             justify-content: center;
-            gap: 50px;
+            gap: 60px;
             max-width: 1200px;
             margin: 0 auto;
             flex-wrap: wrap;
         }
 
         .feature-item {
-            max-width: 300px;
+            max-width: 280px;
         }
 
         .feature-item h4 {
-            color: var(--dark-blue);
-            margin-bottom: 10px;
-            font-size: 16px;
+            color: var(--btn-blue);
+            margin-bottom: 15px;
+            font-size: 15px;
+            font-weight: 700;
         }
 
         .feature-item p {
             font-size: 13px;
-            color: #666;
+            color: #777;
             line-height: 1.5;
         }
 
-        /* Футер */
+        /* --- ФУТЕР --- */
         footer {
-            background-color: #214066; /* Темный цвет футера */
+            background-color: var(--dark-blue);
             color: var(--white);
             text-align: center;
             padding: 40px 20px;
-            font-size: 12px;
-            opacity: 0.95;
+            font-size: 13px;
         }
         
         footer p {
-            margin: 5px 0;
-            opacity: 0.7;
+            margin: 8px 0;
+            opacity: 0.8;
+            font-weight: 300;
         }
 
-        /* Адаптив для мобильных */
+        /* --- АДАПТИВ (МОБИЛЬНЫЕ) --- */
         @media (max-width: 768px) {
-            header, .cards-section, .features-grid {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            nav ul {
-                margin: 20px 0;
-                gap: 15px;
-            }
-
-            .hero h1 { font-size: 28px; }
+            header { padding: 15px 20px; flex-direction: column; gap: 15px; }
+            nav ul { gap: 20px; }
+            .hero { height: auto; padding: 60px 20px; }
+            .hero h1 { font-size: 32px; }
+            .cards-section { flex-direction: column; align-items: center; padding: 40px 20px; }
+            .card { width: 100%; max-width: 350px; }
             
             .fab {
                 position: fixed;
                 bottom: 20px;
                 right: 20px;
                 top: auto;
+                transform: none;
             }
+            .fab:hover { transform: scale(1.1); }
         }
     </style>
 </head>
 <body>
 
-    <!-- Шапка -->
     <header>
         <div class="logo">PARA</div>
         <nav>
@@ -285,19 +319,22 @@
                 <li><a href="#">Игрушки</a></li>
             </ul>
         </nav>
-        <button class="btn-consult">Консультация</button>
+        <button class="btn-consult">
+            Консультация
+            <!-- Иконка лупы SVG -->
+            <svg class="search-icon" viewBox="0 0 24 24">
+                <circle cx="11" cy="11" r="8"></circle>
+                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            </svg>
+        </button>
     </header>
 
-    <!-- Главный баннер -->
     <section class="hero">
-        <div class="hero-content">
-            <h1>Ваш питомец — наш главный герой</h1>
-            <p>Премиальное питание и забота, основанная на науке и любви. Выбирайте лучшее для тех, кто любит вас просто так.</p>
-            <button class="btn-white">Узнать больше</button>
-        </div>
+        <h1>Ваш питомец — наш главный герой</h1>
+        <p>Премиальное питание и забота, основанная на науке и любви. Выбирайте лучшее для тех, кто любит вас просто так.</p>
+        <button class="btn-white">Узнать больше</button>
     </section>
 
-    <!-- Карточки предложений -->
     <section class="cards-section">
         <div class="card">
             <h3>Премиальный старт</h3>
@@ -311,11 +348,14 @@
             <button class="btn-card">Подробнее</button>
         </div>
 
-        <!-- Кнопка чата -->
-        <div class="fab"></div>
+        <!-- Кнопка чата с иконкой сообщения -->
+        <div class="fab">
+            <svg class="chat-icon" viewBox="0 0 24 24">
+                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
+            </svg>
+        </div>
     </section>
 
-    <!-- Преимущества -->
     <section class="features">
         <h2>Почему нам доверяют тысячи хозяев?</h2>
         <div class="features-grid">
@@ -334,7 +374,6 @@
         </div>
     </section>
 
-    <!-- Футер -->
     <footer>
         <p>© 2026 Зоомагазин «PARA»</p>
         <p>Профессиональный подход к счастью домашних животных</p>
