@@ -4,154 +4,82 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PARA - Зоомагазин</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&display=swap" rel="stylesheet">
     <style>
-        /* --- НАСТРОЙКИ --- */
         :root {
-            --primary-blue: #1C5D99;
-            --dark-blue: #1B3A5B;   /* Глубокий синий как в футере */
-            --btn-blue: #204E78;    /* Цвет кнопок */
-            --bg-light: #EAF4FC;    /* Светлый фон секции */
-            --text-main: #333;
+            --dark-blue: #1B3A5B;
+            --btn-blue: #204E78;
+            --bg-light: #EAF4FC;
             --white: #ffffff;
             --green: #2ECC71;
         }
 
         body {
             margin: 0;
-            padding: 0;
             font-family: 'Montserrat', sans-serif;
-            color: var(--text-main);
-            overflow-x: hidden;
+            color: #333;
         }
 
-        a { text-decoration: none; color: inherit; transition: 0.3s; }
-        ul { list-style: none; padding: 0; margin: 0; }
-
-        /* --- ШАПКА (HEADER) --- */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 5%;
-            background-color: var(--white);
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: relative;
-            z-index: 10;
+            background: var(--white);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
-        .logo {
-            font-size: 26px;
-            font-weight: 800;
-            color: var(--dark-blue);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        nav ul {
-            display: flex;
-            gap: 40px;
-        }
-
-        nav ul li a {
-            font-size: 14px;
-            font-weight: 500;
-            color: #555;
-        }
-        nav ul li a:hover { color: var(--primary-blue); }
+        .logo { font-size: 26px; font-weight: 800; color: var(--dark-blue); text-transform: uppercase; }
+        
+        nav ul { display: flex; gap: 30px; list-style: none; }
+        nav ul li a { font-size: 14px; text-decoration: none; color: #555; font-weight: 500; }
 
         .btn-consult {
-            background-color: var(--btn-blue);
-            color: var(--white);
-            padding: 10px 20px 10px 25px;
+            background: var(--btn-blue);
+            color: white;
+            padding: 10px 25px;
             border-radius: 50px;
-            font-size: 13px;
             border: none;
             cursor: pointer;
             font-weight: 600;
             display: flex;
             align-items: center;
             gap: 10px;
-            transition: background 0.3s;
-        }
-        .btn-consult:hover { background-color: #163b65; }
-
-        /* Иконка лупы внутри кнопки */
-        .search-icon {
-            width: 14px;
-            height: 14px;
-            fill: none;
-            stroke: currentColor;
-            stroke-width: 2;
         }
 
-        /* --- ГЛАВНЫЙ ЭКРАН (HERO) --- */
         .hero {
-            /* Синий градиент, имитирующий фото */
-            background: linear-gradient(135deg, #236caf 0%, #1e5799 50%, #1488cc 100%);
             height: 550px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: var(--white);
             position: relative;
-            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            background: linear-gradient(rgba(28, 93, 153, 0.8), rgba(28, 93, 153, 0.8)), 
+                        url('https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?q=80&w=2069&auto=format&fit=crop');
+            background-size: cover;
+            background-position: center;
         }
 
-        /* Декоративный круг на фоне (для красоты) */
-        .hero::before {
-            content: '';
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0) 70%);
-            border-radius: 50%;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-        }
-
-        .hero h1 {
-            font-size: 48px;
-            margin: 0 0 20px 0;
-            font-weight: 700;
-            line-height: 1.1;
-            z-index: 2;
-        }
-
-        .hero p {
-            font-size: 16px;
-            line-height: 1.6;
-            margin-bottom: 35px;
-            max-width: 600px;
-            opacity: 0.95;
-            z-index: 2;
-        }
+        .hero-content h1 { font-size: 46px; margin-bottom: 20px; max-width: 800px; }
+        .hero-content p { font-size: 16px; margin-bottom: 30px; max-width: 600px; opacity: 0.9; margin-left: auto; margin-right: auto; }
 
         .btn-white {
-            background-color: var(--white);
+            background: white;
             color: var(--dark-blue);
-            padding: 16px 40px;
+            padding: 15px 40px;
             border-radius: 50px;
-            font-weight: 700;
-            font-size: 14px;
             border: none;
+            font-weight: 700;
             cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            z-index: 2;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: 0.3s;
         }
+        .btn-white:hover { transform: scale(1.05); }
 
-        .btn-white:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
-        }
-
-        /* --- КАРТОЧКИ --- */
         .cards-section {
-            background-color: var(--bg-light);
+            background: var(--bg-light);
             padding: 80px 20px;
             display: flex;
             justify-content: center;
@@ -160,151 +88,94 @@
         }
 
         .card {
-            background: var(--white);
+            background: white;
+            padding: 40px;
             border-radius: 20px;
-            padding: 40px 35px;
-            width: 380px;
+            width: 350px;
             text-align: center;
-            box-shadow: 0 10px 40px rgba(28, 93, 153, 0.08);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            transition: transform 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
         }
 
-        .card:hover {
-            transform: translateY(-5px);
-        }
-
-        .card h3 {
-            color: var(--btn-blue);
-            margin: 0 0 15px 0;
-            text-transform: uppercase;
-            font-size: 18px;
-            font-weight: 700;
-            letter-spacing: 0.5px;
-        }
-
-        .card p {
-            font-size: 14px;
-            color: #666;
-            line-height: 1.6;
-            margin-bottom: 30px;
-        }
+        .card h3 { color: var(--btn-blue); text-transform: uppercase; margin-bottom: 15px; }
+        .card p { font-size: 14px; color: #666; margin-bottom: 25px; line-height: 1.6; }
 
         .btn-card {
-            background-color: var(--btn-blue);
-            color: var(--white);
-            padding: 14px 40px;
+            background: var(--btn-blue);
+            color: white;
+            padding: 12px 30px;
             border-radius: 50px;
             border: none;
-            cursor: pointer;
             font-weight: 600;
-            font-size: 14px;
-            transition: background 0.3s;
+            cursor: pointer;
+            width: 100%;
         }
-        .btn-card:hover { background-color: #163b65; }
 
-        /* Плавающая кнопка (Чат) */
         .fab {
             position: absolute;
             right: 40px;
             top: 50%;
             transform: translateY(-50%);
-            width: 55px;
-            height: 55px;
-            background-color: var(--green);
+            width: 60px;
+            height: 60px;
+            background: var(--green);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
             cursor: pointer;
-            transition: transform 0.3s;
-            z-index: 100;
-        }
-        .fab:hover { transform: translateY(-50%) scale(1.1); }
-        
-        .chat-icon {
-            width: 24px;
-            height: 24px;
-            fill: white;
+            box-shadow: 0 5px 15px rgba(46, 204, 113, 0.4);
         }
 
-        /* --- ПРЕИМУЩЕСТВА --- */
-        .features {
-            background-color: var(--white);
-            padding: 80px 20px;
-            text-align: center;
-        }
+        .features { padding: 80px 20px; text-align: center; }
+        .features h2 { font-family: serif; font-size: 30px; margin-bottom: 50px; }
+        .features-grid { display: flex; justify-content: center; gap: 50px; flex-wrap: wrap; }
+        .feature-item { max-width: 250px; }
+        .feature-item h4 { color: var(--btn-blue); margin-bottom: 10px; }
+        .feature-item p { font-size: 13px; color: #777; }
 
-        .features h2 {
-            font-family: 'Times New Roman', serif;
-            font-size: 32px;
-            color: #222;
-            margin-bottom: 60px;
-            font-weight: 600;
-        }
+        footer { background: var(--dark-blue); color: white; text-align: center; padding: 40px; font-size: 12px; }
 
-        .features-grid {
-            display: flex;
+        .modal-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
             justify-content: center;
-            gap: 60px;
-            max-width: 1200px;
-            margin: 0 auto;
-            flex-wrap: wrap;
+            align-items: center;
+            z-index: 1000;
         }
 
-        .feature-item {
-            max-width: 280px;
-        }
-
-        .feature-item h4 {
-            color: var(--btn-blue);
-            margin-bottom: 15px;
-            font-size: 15px;
-            font-weight: 700;
-        }
-
-        .feature-item p {
-            font-size: 13px;
-            color: #777;
-            line-height: 1.5;
-        }
-
-        /* --- ФУТЕР --- */
-        footer {
-            background-color: var(--dark-blue);
-            color: var(--white);
+        .modal {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            max-width: 400px;
+            width: 90%;
+            position: relative;
             text-align: center;
-            padding: 40px 20px;
-            font-size: 13px;
-        }
-        
-        footer p {
-            margin: 8px 0;
-            opacity: 0.8;
-            font-weight: 300;
         }
 
-        /* --- АДАПТИВ (МОБИЛЬНЫЕ) --- */
+        .modal h2 { color: var(--dark-blue); margin-top: 0; }
+        .modal input {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-sizing: border-box;
+        }
+        .close-modal {
+            position: absolute;
+            top: 15px; right: 15px;
+            font-size: 24px;
+            cursor: pointer;
+            color: #999;
+        }
+
         @media (max-width: 768px) {
-            header { padding: 15px 20px; flex-direction: column; gap: 15px; }
-            nav ul { gap: 20px; }
-            .hero { height: auto; padding: 60px 20px; }
-            .hero h1 { font-size: 32px; }
-            .cards-section { flex-direction: column; align-items: center; padding: 40px 20px; }
-            .card { width: 100%; max-width: 350px; }
-            
-            .fab {
-                position: fixed;
-                bottom: 20px;
-                right: 20px;
-                top: auto;
-                transform: none;
-            }
-            .fab:hover { transform: scale(1.1); }
+            header, .cards-section, .features-grid { flex-direction: column; align-items: center; }
+            .hero-content h1 { font-size: 28px; }
+            .fab { position: fixed; bottom: 20px; top: auto; right: 20px; transform: none; }
         }
     </style>
 </head>
@@ -319,41 +190,31 @@
                 <li><a href="#">Игрушки</a></li>
             </ul>
         </nav>
-        <button class="btn-consult">
-            Консультация
-            <!-- Иконка лупы SVG -->
-            <svg class="search-icon" viewBox="0 0 24 24">
-                <circle cx="11" cy="11" r="8"></circle>
-                <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-            </svg>
-        </button>
+        <button class="btn-consult" onclick="openModal('Заказать консультацию')">Консультация 🔍</button>
     </header>
 
     <section class="hero">
-        <h1>Ваш питомец — наш главный герой</h1>
-        <p>Премиальное питание и забота, основанная на науке и любви. Выбирайте лучшее для тех, кто любит вас просто так.</p>
-        <button class="btn-white">Узнать больше</button>
+        <div class="hero-content">
+            <h1>Ваш питомец — наш главный герой</h1>
+            <p>Премиальное питание и забота, основанная на науке и любви. Выбирайте лучшее для тех, кто любит вас просто так.</p>
+            <button class="btn-white" onclick="openModal('Узнать больше о нас')">Узнать больше</button>
+        </div>
     </section>
 
     <section class="cards-section">
         <div class="card">
             <h3>Премиальный старт</h3>
-            <p>Скидка <strong>25%</strong> на первый заказ для котят и щенков. Начните путь чемпиона правильно.</p>
-            <button class="btn-card">Активировать скидку</button>
+            <p>Скидка 25% на первый заказ для котят и щенков. Начните путь чемпиона правильно.</p>
+            <button class="btn-card" onclick="openModal('Активировать скидку 25%')">Активировать скидку</button>
         </div>
 
         <div class="card">
             <h3>Подписка на заботу</h3>
-            <p>Постоянная скидка <strong>15%</strong> на корма при оформлении автозаказа. Еда приедет сама!</p>
-            <button class="btn-card">Подробнее</button>
+            <p>Постоянная скидка 15% на корма при оформлении автозаказа. Еда приедет сама!</p>
+            <button class="btn-card" onclick="openModal('Оформить подписку')">Подробнее</button>
         </div>
 
-        <!-- Кнопка чата с иконкой сообщения -->
-        <div class="fab">
-            <svg class="chat-icon" viewBox="0 0 24 24">
-                <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/>
-            </svg>
-        </div>
+        <div class="fab" onclick="openModal('Чат с поддержкой')">💬</div>
     </section>
 
     <section class="features">
@@ -378,6 +239,38 @@
         <p>© 2026 Зоомагазин «PARA»</p>
         <p>Профессиональный подход к счастью домашних животных</p>
     </footer>
+
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 id="modalTitle">Заголовок</h2>
+            <p>Оставьте ваши данные, и мы свяжемся с вами!</p>
+            <input type="text" placeholder="Ваше имя">
+            <input type="tel" placeholder="+7 (___) ___-__-__">
+            <button class="btn-card" onclick="alert('Спасибо! Мы скоро перезвоним.')">Отправить</button>
+        </div>
+    </div>
+
+    <script>
+        const overlay = document.getElementById('modalOverlay');
+        const title = document.getElementById('modalTitle');
+
+        function openModal(text) {
+            title.innerText = text;
+            overlay.style.display = 'flex';
+        }
+
+        function closeModal() {
+            overlay.style.display = 'none';
+        }
+
+        // Закрытие при клике на фон
+        window.onclick = function(event) {
+            if (event.target == overlay) {
+                closeModal();
+            }
+        }
+    </script>
 
 </body>
 </html>
